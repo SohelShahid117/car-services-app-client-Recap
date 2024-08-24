@@ -1,10 +1,13 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+// import React, { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { AuthContext } from "../Provider/AuthProvider";
+// import { AuthContext } from "../Provider/AuthProvider";
+import useAuth from "../../hooks/useAuth";
 
 const Checkout = () => {
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const { id } = useParams();
   console.log("get one service-->", id);
 

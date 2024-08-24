@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
+// import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.svg";
-import { AuthContext } from "../Provider/AuthProvider";
+import useAuth from "../../hooks/useAuth";
+// import { AuthContext } from "../Provider/AuthProvider";
 
 const Navbar = () => {
-  const { user, setUser, logOut } = useContext(AuthContext);
+  // const { user, setUser, logOut } = useContext(AuthContext);
+  const { user, setUser, logOut } = useAuth();
   console.log(user);
   const handleLogout = () => {
     logOut()
@@ -66,7 +68,7 @@ const Navbar = () => {
           </ul>
         </div>
         <Link to="/" className="btn btn-ghost text-xl">
-          <img src={logo} alt="" srcset="" />
+          <img src={logo} alt="" srcSet="" />
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
