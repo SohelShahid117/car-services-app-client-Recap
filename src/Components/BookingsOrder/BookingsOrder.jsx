@@ -12,7 +12,7 @@ const BookingsOrder = () => {
 
   useEffect(() => {
     axios
-      .get(url)
+      .get(url, { withCredentials: true })
       .then((result) => {
         console.log(result.data);
         setBookings(result.data);
