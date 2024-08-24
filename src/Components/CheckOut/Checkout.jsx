@@ -1,30 +1,32 @@
 import axios from "axios";
 // import React, { useContext, useEffect, useState } from "react";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 // import { AuthContext } from "../Provider/AuthProvider";
 import useAuth from "../../hooks/useAuth";
+import useServices from "../../hooks/useServices";
 
 const Checkout = () => {
   // const { user } = useContext(AuthContext);
   const { user } = useAuth();
+  const service = useServices();
   const { id } = useParams();
   console.log("get one service-->", id);
 
-  const [service, setService] = useState({});
+  // const [service, setService] = useState({});
   const { title, service_id, price, img } = service;
 
-  useEffect(() => {
-    axios
-      //http://localhost:3000/getOneService/66c28bf1748abe9eafd6705a
-      .get(`http://localhost:3000/getOneService/${id}`)
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
-        setService(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, [id]);
+  // useEffect(() => {
+  //   axios
+  //     //http://localhost:3000/getOneService/66c28bf1748abe9eafd6705a
+  //     .get(`http://localhost:3000/getOneService/${id}`)
+  //     .then((res) => {
+  //       console.log(res);
+  //       console.log(res.data);
+  //       setService(res.data);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, [id]);
 
   console.log(service);
 
