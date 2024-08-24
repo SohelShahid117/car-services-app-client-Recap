@@ -1,23 +1,36 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const BookingsOrder = () => {
   const { user } = useContext(AuthContext);
   const [bookings, setBookings] = useState([]);
   const { status } = bookings;
+  const axiosSecure = useAxiosSecure();
   // const number = [1, 2, 3, 4, 5];
   console.log(user);
-  const url = `http://localhost:3000/allBookingsOrder?email=${user?.email}`;
+  // const url = `http://localhost:3000/allBookingsOrder?email=${user?.email}`;
+  const url = `/allBookingsOrder?email=${user?.email}`;
 
   useEffect(() => {
-    axios
-      .get(url, { withCredentials: true })
-      .then((result) => {
-        console.log(result.data);
-        setBookings(result.data);
+    // axios
+    //   .get(url, { withCredentials: true })
+    //   .then((result) => {
+    //     console.log(result.data);
+    //     setBookings(result.data);
+    //   })
+    //   .then((err) => console.log(err));
+
+    axiosSecure
+      .get(url)
+      .then((res) => {
+        console.log(res.data);
+        setBookings(res.data);
       })
-      .then((err) => console.log(err));
+      .then((err) => {
+        console.log(err);
+      });
   }, []);
 
   // useEffect(() => {
