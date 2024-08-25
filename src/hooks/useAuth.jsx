@@ -4,10 +4,7 @@ import { AuthContext } from "../Components/Provider/AuthProvider";
 const useAuth = () => {
   const authCustom = useContext(AuthContext);
   return authCustom;
-  //   return (
-  //     <div>
-  //     </div>
-  //   )
+  // return (<div></div>)
 };
 
 export default useAuth;

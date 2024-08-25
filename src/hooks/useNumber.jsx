@@ -15,11 +15,7 @@ const useNumber = () => {
         console.log(err);
       });
   }, []);
-  //   return (
-  //     <div>
-
-  //     </div>
-  //   )
+  // return ( <div></div>)
   return number;
 };
 
