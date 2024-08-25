@@ -1,5 +1,5 @@
 const bookingRow = ({ booking }) => {
-  console.log(booking);
+  //console.log(booking);
   return (
     <tr>
       <th>

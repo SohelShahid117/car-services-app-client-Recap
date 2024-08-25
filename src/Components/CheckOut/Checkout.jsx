@@ -18,8 +18,8 @@ const Checkout = () => {
 
   // useEffect(() => {
   //   axios
-  //     //http://localhost:3000/getOneService/66c28bf1748abe9eafd6705a
-  //     .get(`http://localhost:3000/getOneService/${id}`)
+  //     //https://car-services-app-server-recap-c6jy.vercel.app/getOneService/66c28bf1748abe9eafd6705a
+  //     .get(`https://car-services-app-server-recap-c6jy.vercel.app/getOneService/${id}`)
   //     .then((res) => {
   //       console.log(res);
   //       console.log(res.data);
@@ -58,7 +58,10 @@ const Checkout = () => {
     console.log(serviceOrder);
     //using axios
     axios
-      .post("http://localhost:3000/bookingsOrder", serviceOrder)
+      .post(
+        "https://car-services-app-server-recap-c6jy.vercel.app/bookingsOrder",
+        serviceOrder
+      )
       .then((data) => {
         console.log(data.data);
         if (data.data.acknowledged) {

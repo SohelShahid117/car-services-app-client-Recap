@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 const axiosSecure = axios.create({
   // baseURL: 'https://some-domain.com/api',
-  baseURL: "http://localhost:3000",
+  baseURL: "https://car-services-app-server-recap-c6jy.vercel.app",
+  // https://car-services-app-server-recap-c6jy.vercel.app
   withCredentials: true,
 });
 

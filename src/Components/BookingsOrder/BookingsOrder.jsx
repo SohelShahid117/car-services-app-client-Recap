@@ -6,12 +6,15 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 const BookingsOrder = () => {
   const { user } = useContext(AuthContext);
   const [bookings, setBookings] = useState([]);
-  const { status } = bookings;
+  const { status, date } = bookings;
+  //console.log(status, date);
   const axiosSecure = useAxiosSecure();
   // const number = [1, 2, 3, 4, 5];
-  console.log(user);
-  // const url = `http://localhost:3000/allBookingsOrder?email=${user?.email}`;
+  //console.log(user);
+  // const url = `https://car-services-app-server-recap-c6jy.vercel.app/allBookingsOrder?email=${user?.email}`;
   const url = `/allBookingsOrder?email=${user?.email}`;
+
+  const [newDate, setNewDate] = useState("");
 
   useEffect(() => {
     // axios
@@ -25,13 +28,13 @@ const BookingsOrder = () => {
     axiosSecure
       .get(url)
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         setBookings(res.data);
       })
       .then((err) => {
         console.log(err);
       });
-  }, []);
+  }, [url, axiosSecure]);
 
   // useEffect(() => {
   //   fetch(url)
@@ -52,19 +55,21 @@ const BookingsOrder = () => {
   //   };
   //   getAllBookingOrder();
   // }, []);
-  console.log(bookings);
-  console.log(status);
+  //console.log(bookings);
+  //console.log(status);
 
   const handleDelete = (id) => {
-    console.log("delete", id);
+    //console.log("delete", id);
     const proceed = confirm("are u sure want to delete");
 
     //DELETE
     if (proceed) {
       axios
-        .delete(`http://localhost:3000/allBookingsOrder/${id}`)
+        .delete(
+          `https://car-services-app-server-recap-c6jy.vercel.app/allBookingsOrder/${id}`
+        )
         .then((res) => {
-          console.log(res.data);
+          //console.log(res.data);
           if (res.data.deletedCount) {
             alert("order deleted successfully");
           }
@@ -80,9 +85,12 @@ const BookingsOrder = () => {
   const handleBookingConfirm = (id) => {
     console.log("upadate/confirm", id);
     axios
-      .patch(`http://localhost:3000/allBookingsOrder/${id}`, {
-        status: "confirm",
-      })
+      .patch(
+        `https://car-services-app-server-recap-c6jy.vercel.app/allBookingsOrder/${id}`,
+        {
+          status: "confirm",
+        }
+      )
       .then((res) => {
         console.log(res.data);
         if (res.data.modifiedCount) {
@@ -132,7 +140,7 @@ const BookingsOrder = () => {
               </th>
               <th className="text-black text-lg">Image</th>
               <th className="text-black text-lg">Service</th>
-              <th className="text-black text-lg">Date</th>
+              <th className="text-orange-500 text-lg">Date</th>
               <th className="text-black text-lg">Price</th>
               <th className="text-black text-lg">Status</th>
             </tr>
@@ -175,7 +183,19 @@ const BookingsOrder = () => {
                       </div>
                     </td>
                     <td className="text-black">{b.service}</td>
-                    <td className="text-black">{b.date}</td>
+
+                    <td className="text-black">
+                      {b.status == "confirm" ? (
+                        <span>{b.date}</span>
+                      ) : (
+                        <input
+                          type="date"
+                          value={b.date}
+                          onChange={(e) => setNewDate(e.target.value)}
+                        />
+                      )}
+                    </td>
+
                     <td className="text-black">{b.price}</td>
                     <td className="text-black">
                       {b.status == "confirm" ? (
@@ -203,3 +223,67 @@ const BookingsOrder = () => {
 };
 
 export default BookingsOrder;
+
+/*
+// Import necessary modules
+const express = require('express');
+const router = express.Router();
+const Form = require('../models/Form');
+
+// Update form date
+router.put('/update-date/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { newDate } = req.body;
+
+        const updatedForm = await Form.findByIdAndUpdate(
+            id, 
+            { date: newDate }, 
+            { new: true } // returns the updated document
+        );
+
+        if (!updatedForm) {
+            return res.status(404).json({ message: 'Form not found' });
+        }
+
+        res.json(updatedForm);
+    } catch (error) {
+        res.status(500).json({ message: 'Server Error', error });
+    }
+});
+
+module.exports = router;
+
+*/
+
+/*
+import React, { useState } from 'react';
+import axios from 'axios';
+
+const UpdateDateForm = ({ formId }) => {
+    const [newDate, setNewDate] = useState('');
+
+    const updateDate = async () => {
+        try {
+            const response = await axios.put(`/api/update-date/${formId}`, { newDate });
+            console.log('Updated Form:', response.data);
+        } catch (error) {
+            console.error('Error updating date:', error);
+        }
+    };
+
+    return (
+        <div>
+            <input 
+                type="date" 
+                value={newDate} 
+                onChange={(e) => setNewDate(e.target.value)} 
+            />
+            <button onClick={updateDate}>Update Date</button>
+        </div>
+    );
+};
+
+export default UpdateDateForm;
+
+*/

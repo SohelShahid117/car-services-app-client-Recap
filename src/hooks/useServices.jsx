@@ -8,8 +8,10 @@ const useServices = () => {
 
   useEffect(() => {
     axios
-      //http://localhost:3000/getOneService/66c28bf1748abe9eafd6705a
-      .get(`http://localhost:3000/getOneService/${id}`)
+      //https://car-services-app-server-recap-c6jy.vercel.app/getOneService/66c28bf1748abe9eafd6705a
+      .get(
+        `https://car-services-app-server-recap-c6jy.vercel.app/getOneService/${id}`
+      )
       .then((res) => {
         console.log(res);
         console.log(res.data);

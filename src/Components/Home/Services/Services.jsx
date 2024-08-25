@@ -4,7 +4,9 @@ import axios from "axios";
 
 const Services = () => {
   const [services, setServices] = useState([]);
-  //http://localhost:3000/getAllServices
+
+  // const services = useServices();
+  //https://car-services-app-server-recap-c6jy.vercel.app/getAllServices
   // useEffect(() => {
   //   fetch("/services.json")
   //     .then((res) => res.json())
@@ -15,15 +17,27 @@ const Services = () => {
   // }, []);
 
   useEffect(() => {
-    const getAllServices = async () => {
-      const responseData = await axios.get(
-        "http://localhost:3000/getAllServices"
-      );
-      console.log(responseData);
-      console.log(responseData.data);
-      setServices(responseData.data);
-    };
-    getAllServices();
+    axios
+      .get(
+        "https://car-services-app-server-recap-c6jy.vercel.app/getAllServices/"
+      )
+      .then((res) => {
+        console.log(res.data);
+        setServices(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // const getAllServices = async () => {
+    //   const responseData = await axios.get(
+    //     "https://car-services-app-server-recap-c6jy.vercel.app/getAllServices"
+    //   );
+    //   console.log(responseData);
+    //   console.log(responseData.data);
+    //   setServices(responseData.data);
+    // };
+    // getAllServices();
   }, []);
   console.log(services);
 

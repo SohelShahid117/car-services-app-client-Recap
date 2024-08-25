@@ -43,10 +43,14 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         console.log(loggedUserEmail);
         axios
-          // .post("http://localhost:3000/jwt", loggedUserEmail)
-          .post("http://localhost:3000/jwt", loggedUserEmail, {
-            withCredentials: true,
-          })
+          // .post("https://car-services-app-server-recap-c6jy.vercel.app/jwt", loggedUserEmail)
+          .post(
+            "https://car-services-app-server-recap-c6jy.vercel.app/jwt",
+            loggedUserEmail,
+            {
+              withCredentials: true,
+            }
+          )
           .then((res) => {
             // console.log(res);
             console.log("token response-->", res.data);
@@ -56,7 +60,7 @@ const AuthProvider = ({ children }) => {
             console.log(err);
           });
 
-        //   fetch("http://localhost:3000/jwt", {
+        //   fetch("https://car-services-app-server-recap-c6jy.vercel.app/jwt", {
         //     method: "POST",
         //     headers: { "content-type": "application/json" },
         //     body: JSON.stringify(loggedUserEmail),
@@ -66,9 +70,13 @@ const AuthProvider = ({ children }) => {
         // }
       } else {
         axios
-          .post("http://localhost:3000/logout", loggedUserEmail, {
-            withCredentials: true,
-          })
+          .post(
+            "https://car-services-app-server-recap-c6jy.vercel.app/logout",
+            loggedUserEmail,
+            {
+              withCredentials: true,
+            }
+          )
           .then((res) => {
             console.log(res.data);
           })
